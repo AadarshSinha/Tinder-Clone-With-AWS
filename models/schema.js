@@ -514,6 +514,53 @@ export const schema = {
     },
     "enums": {},
     "nonModels": {},
-    "codegenVersion": "3.4.4",
     "version": "56cd27f005847e9ce96bc68e3246190b"
 };
+export const onCreateChatData = /* GraphQL */ `
+  subscription onCreateChatData {
+    onCreateChatData {
+      id
+      from
+      to
+      message
+    }
+  }
+`;
+export const onUpdateChatUsers = /* GraphQL */ `
+  subscription onUpdateChatUsers {
+    onUpdateChatUsers {
+      id
+      from
+      to
+      message
+    }
+  }
+`;
+export const onCreateChatUsers = /* GraphQL */ `
+  subscription onCreateChatUsers {
+    onCreateChatUsers {
+      id
+      from
+      to
+      message
+    }
+  }
+`;
+export const onCreateBlock = /* GraphQL */ `
+  subscription onCreateBlock {
+    onCreateBlock {
+      id
+      by
+      to
+    }
+  }
+`;
+export const onDeleteBlock = /* GraphQL */ `
+  subscription onDeleteBlock {
+    onDeleteBlock {
+      id
+      by
+      to
+    }
+  }
+`;

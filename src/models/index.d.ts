@@ -1,8 +1,6 @@
-import { ModelInit, MutableModel, PersistentModelConstructor } from "@aws-amplify/datastore";
-
-
-
-
+import { ModelInit, MutableModel } from "@aws-amplify/datastore";
+// @ts-ignore
+import { LazyLoading, LazyLoadingDisabled } from "@aws-amplify/datastore";
 
 type FeedbackMetaData = {
   readOnlyFields: 'createdAt' | 'updatedAt';
@@ -32,70 +30,145 @@ type UserMetaData = {
   readOnlyFields: 'createdAt' | 'updatedAt';
 }
 
-export declare class Feedback {
+type EagerFeedback = {
   readonly id: string;
   readonly type: string;
   readonly message?: string | null;
   readonly sub?: string | null;
   readonly createdAt?: string | null;
   readonly updatedAt?: string | null;
-  constructor(init: ModelInit<Feedback, FeedbackMetaData>);
-  static copyOf(source: Feedback, mutator: (draft: MutableModel<Feedback, FeedbackMetaData>) => MutableModel<Feedback, FeedbackMetaData> | void): Feedback;
 }
 
-export declare class Block {
+type LazyFeedback = {
+  readonly id: string;
+  readonly type: string;
+  readonly message?: string | null;
+  readonly sub?: string | null;
+  readonly createdAt?: string | null;
+  readonly updatedAt?: string | null;
+}
+
+export declare type Feedback = LazyLoading extends LazyLoadingDisabled ? EagerFeedback : LazyFeedback
+
+export declare const Feedback: (new (init: ModelInit<Feedback, FeedbackMetaData>) => Feedback) & {
+  copyOf(source: Feedback, mutator: (draft: MutableModel<Feedback, FeedbackMetaData>) => MutableModel<Feedback, FeedbackMetaData> | void): Feedback;
+}
+
+type EagerBlock = {
   readonly id: string;
   readonly by: string;
   readonly to: string;
   readonly createdAt?: string | null;
   readonly updatedAt?: string | null;
-  constructor(init: ModelInit<Block, BlockMetaData>);
-  static copyOf(source: Block, mutator: (draft: MutableModel<Block, BlockMetaData>) => MutableModel<Block, BlockMetaData> | void): Block;
 }
 
-export declare class ChatUsers {
+type LazyBlock = {
+  readonly id: string;
+  readonly by: string;
+  readonly to: string;
+  readonly createdAt?: string | null;
+  readonly updatedAt?: string | null;
+}
+
+export declare type Block = LazyLoading extends LazyLoadingDisabled ? EagerBlock : LazyBlock
+
+export declare const Block: (new (init: ModelInit<Block, BlockMetaData>) => Block) & {
+  copyOf(source: Block, mutator: (draft: MutableModel<Block, BlockMetaData>) => MutableModel<Block, BlockMetaData> | void): Block;
+}
+
+type EagerChatUsers = {
   readonly id: string;
   readonly from: string;
   readonly to: string;
   readonly message: string;
   readonly createdAt?: string | null;
   readonly updatedAt?: string | null;
-  constructor(init: ModelInit<ChatUsers, ChatUsersMetaData>);
-  static copyOf(source: ChatUsers, mutator: (draft: MutableModel<ChatUsers, ChatUsersMetaData>) => MutableModel<ChatUsers, ChatUsersMetaData> | void): ChatUsers;
 }
 
-export declare class ChatData {
+type LazyChatUsers = {
   readonly id: string;
   readonly from: string;
   readonly to: string;
   readonly message: string;
   readonly createdAt?: string | null;
   readonly updatedAt?: string | null;
-  constructor(init: ModelInit<ChatData, ChatDataMetaData>);
-  static copyOf(source: ChatData, mutator: (draft: MutableModel<ChatData, ChatDataMetaData>) => MutableModel<ChatData, ChatDataMetaData> | void): ChatData;
 }
 
-export declare class Matches {
+export declare type ChatUsers = LazyLoading extends LazyLoadingDisabled ? EagerChatUsers : LazyChatUsers
+
+export declare const ChatUsers: (new (init: ModelInit<ChatUsers, ChatUsersMetaData>) => ChatUsers) & {
+  copyOf(source: ChatUsers, mutator: (draft: MutableModel<ChatUsers, ChatUsersMetaData>) => MutableModel<ChatUsers, ChatUsersMetaData> | void): ChatUsers;
+}
+
+type EagerChatData = {
+  readonly id: string;
+  readonly from: string;
+  readonly to: string;
+  readonly message: string;
+  readonly createdAt?: string | null;
+  readonly updatedAt?: string | null;
+}
+
+type LazyChatData = {
+  readonly id: string;
+  readonly from: string;
+  readonly to: string;
+  readonly message: string;
+  readonly createdAt?: string | null;
+  readonly updatedAt?: string | null;
+}
+
+export declare type ChatData = LazyLoading extends LazyLoadingDisabled ? EagerChatData : LazyChatData
+
+export declare const ChatData: (new (init: ModelInit<ChatData, ChatDataMetaData>) => ChatData) & {
+  copyOf(source: ChatData, mutator: (draft: MutableModel<ChatData, ChatDataMetaData>) => MutableModel<ChatData, ChatDataMetaData> | void): ChatData;
+}
+
+type EagerMatches = {
   readonly id: string;
   readonly user1: string;
   readonly user2: string;
   readonly createdAt?: string | null;
   readonly updatedAt?: string | null;
-  constructor(init: ModelInit<Matches, MatchesMetaData>);
-  static copyOf(source: Matches, mutator: (draft: MutableModel<Matches, MatchesMetaData>) => MutableModel<Matches, MatchesMetaData> | void): Matches;
 }
 
-export declare class WaitlingList {
+type LazyMatches = {
   readonly id: string;
   readonly user1: string;
   readonly user2: string;
   readonly createdAt?: string | null;
   readonly updatedAt?: string | null;
-  constructor(init: ModelInit<WaitlingList, WaitlingListMetaData>);
-  static copyOf(source: WaitlingList, mutator: (draft: MutableModel<WaitlingList, WaitlingListMetaData>) => MutableModel<WaitlingList, WaitlingListMetaData> | void): WaitlingList;
 }
 
-export declare class User {
+export declare type Matches = LazyLoading extends LazyLoadingDisabled ? EagerMatches : LazyMatches
+
+export declare const Matches: (new (init: ModelInit<Matches, MatchesMetaData>) => Matches) & {
+  copyOf(source: Matches, mutator: (draft: MutableModel<Matches, MatchesMetaData>) => MutableModel<Matches, MatchesMetaData> | void): Matches;
+}
+
+type EagerWaitlingList = {
+  readonly id: string;
+  readonly user1: string;
+  readonly user2: string;
+  readonly createdAt?: string | null;
+  readonly updatedAt?: string | null;
+}
+
+type LazyWaitlingList = {
+  readonly id: string;
+  readonly user1: string;
+  readonly user2: string;
+  readonly createdAt?: string | null;
+  readonly updatedAt?: string | null;
+}
+
+export declare type WaitlingList = LazyLoading extends LazyLoadingDisabled ? EagerWaitlingList : LazyWaitlingList
+
+export declare const WaitlingList: (new (init: ModelInit<WaitlingList, WaitlingListMetaData>) => WaitlingList) & {
+  copyOf(source: WaitlingList, mutator: (draft: MutableModel<WaitlingList, WaitlingListMetaData>) => MutableModel<WaitlingList, WaitlingListMetaData> | void): WaitlingList;
+}
+
+type EagerUser = {
   readonly id: string;
   readonly name: string;
   readonly age: string;
@@ -105,6 +178,22 @@ export declare class User {
   readonly image: string;
   readonly createdAt?: string | null;
   readonly updatedAt?: string | null;
-  constructor(init: ModelInit<User, UserMetaData>);
-  static copyOf(source: User, mutator: (draft: MutableModel<User, UserMetaData>) => MutableModel<User, UserMetaData> | void): User;
+}
+
+type LazyUser = {
+  readonly id: string;
+  readonly name: string;
+  readonly age: string;
+  readonly bio: string;
+  readonly gender: string;
+  readonly sub: string;
+  readonly image: string;
+  readonly createdAt?: string | null;
+  readonly updatedAt?: string | null;
+}
+
+export declare type User = LazyLoading extends LazyLoadingDisabled ? EagerUser : LazyUser
+
+export declare const User: (new (init: ModelInit<User, UserMetaData>) => User) & {
+  copyOf(source: User, mutator: (draft: MutableModel<User, UserMetaData>) => MutableModel<User, UserMetaData> | void): User;
 }
